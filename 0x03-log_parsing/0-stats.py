@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""A module for parsing HTTP request logs.
+"""Parsing HTTP request logs.
 """
 import re
 
