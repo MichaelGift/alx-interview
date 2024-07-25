@@ -1,21 +1,6 @@
 #!/usr/bin/python3
-"""A module for validating UTF-8 encodings.
+"""Determines if a given data set represents a valid UTF-8 encoding.
 """
-
-
-def validateUtf8(data, i, n, span, skip=0):
-    """Validate a UTF-8 encoding.
-    """
-    if n - i >= span:
-        next_body = list(map(
-            lambda x: x & 0b11000000 == 0b10000000,
-            data[i + 1: i + span],
-        ))
-        if not all(next_body):
-            return False
-        skip = span - 1
-    else:
-        return False
 
 
 def validUTF8(data):
@@ -33,13 +18,40 @@ def validUTF8(data):
             skip = 0
         elif data[i] & 0b11111000 == 0b11110000:
             span = 4
-            return validateUtf8(data, i, n, span)
+            if n - i >= span:
+                next_body = list(map(
+                    lambda x: x & 0b11000000 == 0b10000000,
+                    data[i + 1: i + span],
+                ))
+                if not all(next_body):
+                    return False
+                skip = span - 1
+            else:
+                return False
         elif data[i] & 0b11110000 == 0b11100000:
             span = 3
-            return validateUtf8(data, i, n, span)
+            if n - i >= span:
+                next_body = list(map(
+                    lambda x: x & 0b11000000 == 0b10000000,
+                    data[i + 1: i + span],
+                ))
+                if not all(next_body):
+                    return False
+                skip = span - 1
+            else:
+                return False
         elif data[i] & 0b11100000 == 0b11000000:
             span = 2
-            return validateUtf8(data, i, n, span)
+            if n - i >= span:
+                next_body = list(map(
+                    lambda x: x & 0b11000000 == 0b10000000,
+                    data[i + 1: i + span],
+                ))
+                if not all(next_body):
+                    return False
+                skip = span - 1
+            else:
+                return False
         else:
             return False
     return True
