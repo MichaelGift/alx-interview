@@ -12,7 +12,7 @@ def validUTF8(data):
         if skip > 0:
             skip -= 1
             continue
-        if not type(data[i], int) or data[i] < 0 or data[i] > 0x10ffff:
+        if type(data[i]) != int or data[i] < 0 or data[i] > 0x10ffff:
             return False
         elif data[i] <= 0x7f:
             skip = 0
