@@ -26,7 +26,8 @@ def findPositions(n, i=0, a=[], b=[], c=[]):
     if i < n:
         for j in range(n):
             if j not in a and i + j not in b and i - j not in c:
-                yield from findPositions(n, i + 1, a + [j], b + [i + j], c + [i - j])
+                yield from (
+                    findPositions(n, i + 1, a + [j], b + [i + j], c + [i - j]))
     else:
         yield a
 
