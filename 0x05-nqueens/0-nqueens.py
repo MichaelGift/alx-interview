@@ -32,7 +32,7 @@ def findPositions(n, i=0, a=[], b=[], c=[]):
 
 
 def solveNQueens(n):
-    """ solve """
+    """ solve n queens """
     k = []
     i = 0
     for solution in findPositions(n, 0):
